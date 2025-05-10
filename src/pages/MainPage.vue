@@ -1,28 +1,30 @@
 <script setup>
+import test1 from '../assets/test1.png';
 
 </script>
 
 <template>
     <div class="content">
-        <div class="container main ">
+        <div class="container main">
             <div class="container main-fog"></div>
 
             <div class="main-text-container">
 
                 <h1 class="title">The 813  Studio</h1>
                 <p class="main-text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque repellendus tempore nisi, aperiam beatae quae voluptatibus quam fugiat officia quia quidem quod necessitatibus ullam adipisci facere iusto dolorum temporibus. Suscipit.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque repellendus tempore nisi, aperiam beatae quae voluptatibus quam
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque repellendus tempore nisi, aperiam beatae quae voluptatibus quam
+                    <button>Купить</button>
                 </p>
 
             </div>
 
-            <img src="../assets/test1.png" alt="" class="main-img">
+            <img :src="test1"  alt="" class="main-img">
 
         </div>
 
         <div class="container">information 1</div>
         <div class="container">information 2</div>
-        <div class="container">information 3</div>
 
     </div>
 
@@ -35,7 +37,7 @@
     right: 5vw;
 
     z-index: 1;
-    height: 35vw;
+    height: 40vw;
 
 
     image-rendering: pixelated;
@@ -52,11 +54,12 @@
 }
 
 .main-text{
-    color: white;
     
     padding: 2vw;
+    line-height: 1.5vw;
+    height: 15vw;
 
-    background-color: #0c0c0c78;
+    background-color: #e6e6e678;
     backdrop-filter: blur(1vw);
     border-radius: 1vw;
     box-shadow: 0 0.4vw 0.6vw rgba(0, 0, 0, 0.2);
@@ -65,9 +68,8 @@
 
 .main-text-container {
     position: absolute;
-    top: 0vw;
-    left: -15vw;
-
+    top:1vw;
+    left: -17vw;
 
     gap: 1vw;
 
@@ -83,7 +85,6 @@
 
 .title{
 
-
     width: 40vw;
     color: #f0f0f0;
     
@@ -92,11 +93,13 @@
 }
 
 .content {
-    padding-top: 0vw;
+    padding-top: 1vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2vw;
+    min-height: 100vh; 
+    justify-content: flex-start; 
 }
 
 .container {
@@ -105,18 +108,15 @@
     padding: 2vw;
     background-color: #f0f0f0;
     border-radius: 0 0 1vw 1vw;
-
     box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.2);
 }
-
 
 .main {
     margin-top: -5vw;
     padding-top: 0;
     
-    height: 45vw; 
+    height: 50vw;
     
-    background-color: #7b7d7e;
     
     display: flex;
     justify-content: center;
@@ -134,7 +134,8 @@
     position: absolute;
 
     
-    height: 45vw; 
+    height: 50vw;
+
     background-color: #0c0c0c45;
     box-shadow: 0 0vw 0vw rgba(0, 0, 0, 0);
 

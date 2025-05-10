@@ -14,13 +14,13 @@ import { RouterLink } from 'vue-router';
 
 
   <header class="header-style">
-    <RouterLink class="menu-btn blue-line" :to="{ name: 'pageOne' }">Игры</RouterLink>
-    <RouterLink class="menu-btn red-line" :to="{ name: 'pageTwo' }">Фывфыв</RouterLink>
-    <RouterLink class="menu-btn yellow-line" :to="{ name: 'pageThree' }">О Нас</RouterLink>
+    <RouterLink class="menu-btn blue-line" :to="{ name: 'GameStorePage' }">Игры</RouterLink>
+    <RouterLink class="menu-btn blue-line" :to="{ name: 'pageTwo' }">Фывфыв</RouterLink>
+    <RouterLink class="menu-btn blue-line" :to="{ name: 'pageThree' }">О Нас</RouterLink>
 
   </header>
 
-  <RouterLink class="header-style profile red-line" :to="{ name: 'ProfilePage' }">
+  <RouterLink class="header-style profile blue-line" :to="{ name: 'ProfilePage' }">
     <img class="profile-img" src="../assets/login_profile.png" alt="">
   </RouterLink>
 
@@ -59,7 +59,7 @@ import { RouterLink } from 'vue-router';
 
 .header-style {
   position: fixed;
-  bottom: 0.5vw;
+  top: 0.5vw;
 
 
   height: 3.5vw;
@@ -102,14 +102,27 @@ header {
 
 
 .blue-line:hover {
-  box-shadow: 0 -1.3vw 0 rgb(91, 162, 196);
+  box-shadow: 0 1.3vw 0 rgb(91, 196, 151);
 }
 
-.red-line:hover {
+/* .red-line:hover {
   box-shadow: 0 -1.3vw 0 rgb(196, 91, 91);
 }
 
 .yellow-line:hover {
   box-shadow: 0 -1.3vw 0 rgb(238, 212, 98);
+} */
+
+/* .blue-line.router-link-active {
+  box-shadow: 0 1.3vw 0 rgb(91, 196, 151);
+
+} */
+
+/* .red-line.router-link-active {
+  box-shadow: 0 -1.3vw 0 rgb(196, 91, 91);
 }
+
+.yellow-line.router-link-active {
+  box-shadow: 0 -1.3vw 0 rgb(238, 212, 98);
+} */
 </style>

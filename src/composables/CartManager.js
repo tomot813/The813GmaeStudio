@@ -1,28 +1,28 @@
-import { computed, reactive, watch, ref} from "vue";
+import { computed, reactive, watch, ref } from "vue";
 
 const cartItems = ref([])
 
-try{
-    if(localStorage.getItem("cartItems") == null){
+try {
+    if (localStorage.getItem("cartItems") == null) {
         cartItems.value = []
-        
-    }else{
+
+    } else {
         cartItems.value = JSON.parse(localStorage.getItem("cartItems"))
     }
-}catch(error){
+} catch (error) {
     cartItems.value = []
 }
 
-watch(cartItems, (newValue)=>{
+watch(cartItems, (newValue) => {
     localStorage.setItem("cartItems", JSON.stringify(newValue))
 
 },
-{deep:true})
+    { deep: true })
 
 
 class CartManager {
     static instance = null;
-    
+
     constructor() {
         if (CartManager.instance) {
             return CartManager.instance;
@@ -52,7 +52,7 @@ class CartManager {
             cartItems.value.push({ userId, productId });
         }
     }
-    
+
     clearCartByUserId(userId) {
         for (let i = cartItems.value.length - 1; i >= 0; i--) {
             if (cartItems.value[i].userId == userId) {
