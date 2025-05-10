@@ -7,18 +7,18 @@ import test1 from '../assets/test1.png';
     <div class="content">
         <div class="container main">
             <div class="container main-fog"></div>
-
+            
             <div class="main-text-container">
-
+                
                 <h1 class="title">The 813  Studio</h1>
                 <p class="main-text">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque repellendus tempore nisi, aperiam beatae quae voluptatibus quam
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque repellendus tempore nisi, aperiam beatae quae voluptatibus quam
-                    <button>Купить</button>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing 
                 </p>
-
+                
             </div>
-
+            
             <img :src="test1"  alt="" class="main-img">
 
         </div>
@@ -34,9 +34,10 @@ import test1 from '../assets/test1.png';
 .main-img{
     position: absolute;
     top: 10vw;
-    right: 5vw;
+    right: 7vw;
+    
 
-    z-index: 1;
+    /* z-index: 1; */
     height: 40vw;
 
 
@@ -59,7 +60,9 @@ import test1 from '../assets/test1.png';
     line-height: 1.5vw;
     height: 15vw;
 
-    background-color: #e6e6e678;
+    /* background-color: #e6e6e678; */
+    background-color: #797979a6;
+    color: white;
     backdrop-filter: blur(1vw);
     border-radius: 1vw;
     box-shadow: 0 0.4vw 0.6vw rgba(0, 0, 0, 0.2);
@@ -126,7 +129,7 @@ import test1 from '../assets/test1.png';
     background-image: url("../assets/NatureBackground.png");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: top;
+    background-position: bottom;
 
     image-rendering: pixelated;
 }
@@ -136,7 +139,7 @@ import test1 from '../assets/test1.png';
     
     height: 50vw;
 
-    background-color: #0c0c0c45;
+    background-color: #2e2e2e48;
     box-shadow: 0 0vw 0vw rgba(0, 0, 0, 0);
 
 }

@@ -1,28 +1,32 @@
-import { computed, reactive, watch, ref} from "vue";
+import { computed, reactive, watch, ref } from "vue";
 
 const products = ref([])
 
-try{
-    if(localStorage.getItem("products") == null){
+try {
+    if (localStorage.getItem("products") == null) {
         products.value = []
-        
-    }else{
+
+    } else {
         products.value = JSON.parse(localStorage.getItem("products"))
     }
-}catch(error){
+} catch (error) {
     products.value = []
 }
 
-watch(products, (newValue)=>{
+watch(products, (newValue) => {
     localStorage.setItem("products", JSON.stringify(newValue))
 
 },
-{deep:true})
+    { deep: true })
+
+products.value = []
 
 
+let description_perkele = "Безумное приключение в мире, где всё пошло не так. После взрыва завода по производству мятных жевательных резинок, маленький финский городок превращается в эпицентр хаоса. Местные звери мутируют, соседи сходят с ума, а ты — уставший почтальон с клюшкой — должен навести порядок, раздавая газеты, устраняя угрозы и выясняя, что вообще произошло."
+let description_flower_store = "Вы — владелец цветочного магазина в уютном городке на острове. Исследуйте окрестности, собирайте редкие цветы или выращивайте их в теплице во дворе. Украшайте витрины, улучшайте магазин. Ваша цель — превратить скромный цветочный уголок в самое красивое место на всём острове."
 class ProductManager {
     static instance = null;
-    
+
     constructor() {
         if (ProductManager.instance) {
             return ProductManager.instance;
@@ -30,11 +34,12 @@ class ProductManager {
         ProductManager.instance = this;
 
         if (products.value.length == 0) {
-            this.createProduct("Perkele", "0/");
-            this.createProduct("Flover Store", "0/");
+            this.createProduct("Flover Store", description_flower_store, "10$", "src/assets/test1.png", "src/assets/NatureBackground.png", "testUrlEXE",);
+            this.createProduct("Perkele", description_perkele, "100$", "src/assets/perkele2.png", "src/assets/perkele.png", "testUrlEXE",);
+
         }
     }
-    
+
 
     getProducts() {
         return products.value;
@@ -49,15 +54,19 @@ class ProductManager {
 
         return product
     }
-    
-    createProduct(productName, productData){
+
+    createProduct(productName, productDescription, productPrice, productImgUrl, productBackgroundImgUrl, productData) {
         let newProductId = 0
-        if(products.value.length > 0){
-            newProductId =  products.value[products.value.length-1].id + 1
+        if (products.value.length > 0) {
+            newProductId = products.value[products.value.length - 1].id + 1
         }
         products.value.push({
             id: newProductId,
             productName: productName,
+            productDescription: productDescription,
+            productPrice: productPrice,
+            productImgUrl: productImgUrl,
+            productBackgroundImgUrl: productBackgroundImgUrl,
             productData: productData
         })
     }
@@ -67,7 +76,7 @@ class ProductManager {
         if (index == -1) {
             return
         }
-    
+
         products.value.splice(index, 1)
     }
 
