@@ -5,13 +5,13 @@ import ProfilePage from './pages/ProfilePage.vue'
 import GameStorePage from './pages/GameStorePage.vue'
 import NewsPage from './pages/NewsPage.vue'
 
+import AboutPage from './pages/AboutPage.vue'
 
 
 
 
 import PageOne from './pages/one.vue'
 import PageTwo from './pages/two.vue'
-import PageThree from './pages/three.vue'
 
 
 
@@ -21,9 +21,7 @@ const routes = [
     { path: "/profile", component: ProfilePage, name: "ProfilePage" },
     { path: "/store", component: GameStorePage, name: "GameStorePage" },
     { path: "/news", component: NewsPage, name: "NewsPage" },
-    { path: "/one", component: PageOne, name: "pageOne" },
-    { path: "/two", component: PageTwo, name: "pageTwo" },
-    { path: "/three", component: PageThree, name: "pageThree" }
+    { path: "/about", component: AboutPage, name: "AboutPage" }
 ]
 
 

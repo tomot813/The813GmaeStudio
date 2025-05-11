@@ -15,7 +15,7 @@ import { RouterLink } from 'vue-router';
   <header class="header-style">
     <RouterLink class="menu-btn blue-line" :to="{ name: 'GameStorePage' }">Игры</RouterLink>
     <RouterLink class="menu-btn blue-line" :to="{ name: 'NewsPage' }">Новости</RouterLink>
-    <RouterLink class="menu-btn blue-line" :to="{ name: 'pageThree' }">О Нас</RouterLink>
+    <RouterLink class="menu-btn blue-line" :to="{ name: 'AboutPage' }">О Нас</RouterLink>
 
   </header>
 
@@ -54,6 +54,18 @@ import { RouterLink } from 'vue-router';
 .profile-img {
   height: 2.5vw;
   width: 2.5vw;
+
+  image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges; 
+    image-rendering: -o-crisp-edges;   
+    image-rendering: -webkit-optimize-contrast; 
+    image-rendering: optimize-contrast;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: optimizeSpeed; 
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
 }
 
 .header-style {
@@ -100,9 +112,16 @@ header {
 
 
 .blue-line:hover {
+  color: #5cbd5f;
+
   box-shadow: 0 1.3vw 0 #5cbd5f;
   
 
+}
+
+img:hover {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(53%) saturate(379%) hue-rotate(76deg) brightness(92%) contrast(93%);
+    cursor: pointer;
 }
 
 /* .red-line:hover {

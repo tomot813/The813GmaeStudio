@@ -20,7 +20,6 @@ import test1 from '../assets/test1.png';
 		</div>
 
 		<div class="container">information 1</div>
-		<div class="container">information 2</div>
 	</div>
 </template>
 

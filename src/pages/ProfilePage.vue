@@ -99,8 +99,7 @@ function downloadFile() {
             </div>
             
             <div class="user-games">
-                <div class="user-games-card" v-for="productId in cartProductsId" 
-                    :style="{
+                <div class="user-games-card" v-for="productId in cartProductsId"  :style="{
                         backgroundImage: `url(${productManager.getProductById(productId).backgroundImgUrl})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'bottom'
