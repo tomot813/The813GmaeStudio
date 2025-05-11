@@ -35,7 +35,7 @@ import { RouterLink } from 'vue-router';
   font-size: 1.1vw;
   width: 3.5vw;
   left: 15.5vw;
-  transition: 0.3s;
+  transition: box-shadow 0.3s;
 }
 
 
@@ -48,7 +48,7 @@ import { RouterLink } from 'vue-router';
 .profile {
   width: 3.5vw;
   right: 15.5vw;
-  transition: 0.5s;
+  transition: box-shadow 0.5s;
 
 }
 
@@ -94,14 +94,16 @@ header {
 
 .menu-btn {
   color: rgb(255, 255, 255);
-  transition: 0.5s;
+  transition: box-shadow 0.5s;
   width: 10vw;
 }
 
 
 
 .blue-line:hover {
-  box-shadow: 0 1.3vw 0 rgba(163, 180, 184, 0.692);
+  box-shadow: 0 1.3vw 0 #5cbd5f;
+  
+
 }
 
 /* .red-line:hover {

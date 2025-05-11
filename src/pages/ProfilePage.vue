@@ -10,7 +10,7 @@ const productManager = new ProductManager();
 const cartManager = new CartManager();
 
 const cartProductsId = computed(() => {
-    return cartManager.getProductIdsByUserId(userManager.getCurrentUser())
+    return cartManager.getProductIdsByUserId(userManager.getCurrentUser()) || [];
 });
 
 
@@ -67,7 +67,7 @@ function login() {
 
 function downloadFile() {
     const link = document.createElement('a');
-    link.href = 'src/download/test.txt'; 
+    link.href = '/The813GmaeStudio/download/test.txt'; 
     link.download = 'test.txt'; 
     link.click();
 }
@@ -99,7 +99,7 @@ function downloadFile() {
             </div>
             
             <div class="user-games">
-                <div class="user-games-card" v-for="productId in cartProductsId"
+                <div class="user-games-card" v-for="productId in cartProductsId" 
                     :style="{
                         backgroundImage: `url(${productManager.getProductById(productId).backgroundImgUrl})`,
                         backgroundSize: 'cover',
@@ -117,13 +117,18 @@ function downloadFile() {
 
         </div>
         
-        <div class="container" v-if="userManager.getCurrentUser() == null">
-            <input type="text" placeholder="name" v-model="user.name">
-            <input type="email" placeholder="email" v-model="user.email">
-            <input type="password" placeholder="password" v-model="user.password">
-            <button @click="login()">login</button>
-            <button @click="createUser()">Create</button>
-            {{ userManager.getUsers() }}
+        <div class="container login-card" v-if="userManager.getCurrentUser() == null">
+            <div class="login-fog"></div>
+            <div class="login-content">
+                <h2>Добро пожаловать!</h2>
+                <input type="text" placeholder="Имя" v-model="user.name">
+                <input type="email" placeholder="Email" v-model="user.email">
+                <input type="password" placeholder="Пароль" v-model="user.password">
+                <div class="login-buttons">
+                    <button @click="login()">Войти</button>
+                    <button @click="createUser()">Создать аккаунт</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -289,7 +294,7 @@ function downloadFile() {
 }
 
 .user-games-card-text{
-    transition: 0.3s;
+    transition: bottom 0.3s;
     
     position: relative; 
     bottom: -10vw;
@@ -313,12 +318,18 @@ function downloadFile() {
 }
 .user-games-card-text-btn{
     width: 10vw;
+    background-color: #5cbd5f;
+    color: white;
+    transition: background-color 0.3s;
 }
 
 .user-games-card-text:hover{
     bottom: -6vw;
-
+    color: #5cbd5f;
+    background-color: #ffffff;
 }
+
+
 
 .user-games-card-fog{
     position: absolute;
@@ -347,5 +358,77 @@ function downloadFile() {
     background-color: transparent;
 }
 
+
+
+
+.login-card {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 45vw;
+    background-image: url("../assets/NatureBackground.png");
+    background-size: cover;
+    background-position: center;
+    border-radius: 1vw;
+    overflow: hidden;
+}
+
+.login-fog {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #797979a6;
+    backdrop-filter: blur(0.6vw);
+    z-index: 0;
+}
+
+.login-content {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vw;
+    padding: 2vw;
+    width: 30vw;
+    color: white;
+}
+
+.login-content h2 {
+    font-size: 2vw;
+    margin-bottom: 1vw;
+}
+
+.login-content input {
+    width: 100%;
+    padding: 0.6vw;
+    border-radius: 0.5vw;
+    border: none;
+    outline: none;
+    font-size: 1vw;
+}
+
+.login-buttons {
+    display: flex;
+    gap: 1vw;
+    margin-top: 1vw;
+}
+
+.login-buttons button {
+    padding: 0.6vw 1.2vw;
+    font-size: 1vw;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    background-color: #5cbd5f;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.login-buttons button:hover {
+    color: #5cbd5f;
+    background-color: #ffffff;
+}
 
 </style>
