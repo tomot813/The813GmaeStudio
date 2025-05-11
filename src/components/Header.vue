@@ -15,7 +15,7 @@ import { RouterLink } from 'vue-router';
 
   <header class="header-style">
     <RouterLink class="menu-btn blue-line" :to="{ name: 'GameStorePage' }">Игры</RouterLink>
-    <RouterLink class="menu-btn blue-line" :to="{ name: 'pageTwo' }">Фывфыв</RouterLink>
+    <RouterLink class="menu-btn blue-line" :to="{ name: 'pageTwo' }">Разработка</RouterLink>
     <RouterLink class="menu-btn blue-line" :to="{ name: 'pageThree' }">О Нас</RouterLink>
 
   </header>
@@ -71,7 +71,6 @@ import { RouterLink } from 'vue-router';
   z-index: 1000;
 
 
-
     background-color: #0c0c0c96;
   /* background-color: rgba(22, 22, 22, 0.815); */
   backdrop-filter: blur(0.6vw);
@@ -102,7 +101,7 @@ header {
 
 
 .blue-line:hover {
-  box-shadow: 0 1.3vw 0 rgb(91, 196, 151);
+  box-shadow: 0 1.3vw 0 rgba(163, 180, 184, 0.692);
 }
 
 /* .red-line:hover {

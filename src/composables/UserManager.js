@@ -3,7 +3,7 @@ import CartManager from "./CartManager";
 
 
 const users = ref([])
-const currentUser = ref(0)
+const currentUser = ref()
 
 
 
@@ -26,7 +26,7 @@ watch(users, (newValue) => {
 
 
 if (localStorage.getItem("currentUser") == null || localStorage.getItem("currentUser") == "null") {
-    currentUser.value = "null"
+    currentUser.value = null
 } else {
     currentUser.value = Number(localStorage.getItem("currentUser"))
 }
@@ -36,9 +36,10 @@ watch(currentUser, (newValue) => {
 
 })
 
-
+users.value = []
 
 const cartManager = new CartManager()
+
 class UserManager {
     static instance = null;
 
@@ -47,6 +48,11 @@ class UserManager {
             return UserManager.instance;
         }
         UserManager.instance = this;
+
+        if (users.value.length == 0) {
+            this.createUser("123", "123", "123")
+            this.loginUser("123", "123", "123")
+        }
     }
 
     getUsers() {
@@ -69,8 +75,8 @@ class UserManager {
     }
 
 
-    createUser(userUame, userrPassword, email) {
-        const existingEmail = users.value.find(u => u.email == email.trim());
+    createUser(userUame, userPassword, userEmail) {
+        const existingEmail = users.value.find(u => u.email == userEmail.trim());
         if (existingEmail) {
             return false;
         }
@@ -84,8 +90,8 @@ class UserManager {
         users.value.push({
             id: newUserId,
             name: userUame,
-            password: userrPassword,
-            email: email
+            password: userPassword,
+            email: userEmail
         });
         return true;
 
@@ -122,7 +128,6 @@ class UserManager {
         if (typeof name != "string" || typeof password != "string" || typeof email != "string") {
             return false;
         }
-
         const user = users.value.find(u =>
             u.name == name.trim() &&
             u.password == password.trim() &&
@@ -136,6 +141,10 @@ class UserManager {
         currentUser.value = user.id;
         return true;
     }
+    logoutUser() {
+        currentUser.value = null
+    }
+
 }
 
 export default UserManager;

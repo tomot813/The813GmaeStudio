@@ -1,5 +1,11 @@
 import { computed, reactive, watch, ref } from "vue";
 
+import test1Img from '../assets/test1.png'
+import natureBg from '../assets/NatureBackground.png'
+import perkeleImg from '../assets/perkele2.png'
+import perkeleBg from '../assets/perkele.png'
+
+
 const products = ref([])
 
 try {
@@ -34,8 +40,9 @@ class ProductManager {
         ProductManager.instance = this;
 
         if (products.value.length == 0) {
-            this.createProduct("Flover Store", description_flower_store, "10$", "src/assets/test1.png", "src/assets/NatureBackground.png", "testUrlEXE",);
-            this.createProduct("Perkele", description_perkele, "100$", "src/assets/perkele2.png", "src/assets/perkele.png", "testUrlEXE",);
+            this.createProduct("Flower Store", description_flower_store, "10$", test1Img, natureBg, "testUrlEXE",);
+
+            this.createProduct("Perkele", description_perkele, "100$", perkeleImg, perkeleBg, "testUrlEXE",);
 
         }
     }
@@ -62,17 +69,17 @@ class ProductManager {
         }
         products.value.push({
             id: newProductId,
-            productName: productName,
-            productDescription: productDescription,
-            productPrice: productPrice,
-            productImgUrl: productImgUrl,
-            productBackgroundImgUrl: productBackgroundImgUrl,
-            productData: productData
+            name: productName,
+            description: productDescription,
+            price: productPrice,
+            imgUrl: productImgUrl,
+            backgroundImgUrl: productBackgroundImgUrl,
+            data: productData
         })
     }
 
     deleteProductById(productId) {
-        const index = products.value.findIndex(p => p.id == productId)
+        const index = products.value.findIndex(p => p.productId == productId)
         if (index == -1) {
             return
         }

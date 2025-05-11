@@ -41,16 +41,23 @@ class CartManager {
     // }
 
     getProductIdsByUserId(userId) {
+        if (userId == null) {
+            return []
+        }
+
         const userCartItems = cartItems.value.filter(item => item.userId === userId);
         const productIds = userCartItems.map(item => item.productId);
         return productIds;
     }
 
     addToCart(userId, productId) {
+        let flag = false
         const exists = cartItems.value.some(item => item.userId == userId && item.productId == productId);
         if (!exists) {
             cartItems.value.push({ userId, productId });
+            flag = true;
         }
+        return flag
     }
 
     clearCartByUserId(userId) {

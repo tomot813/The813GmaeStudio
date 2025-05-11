@@ -57,6 +57,10 @@ function BuyProductById(productId) {
 
 <!-- 
 
+
+                <button @click="cartManager.clearCartByUserId(userManager.getCurrentUser())">clear Cart</button>
+
+
 <script setup>
 
 </script>

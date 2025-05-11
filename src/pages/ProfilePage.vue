@@ -1,18 +1,125 @@
 <script setup>
+import { ref, computed,reactive } from 'vue';
+
 import UserManager from '../composables/UserManager.js';
+import ProductManager from '../composables/ProductManager.js';
+import CartManager from '../composables/CartManager.js';
 
 const userManager = new UserManager();
+const productManager = new ProductManager();
+const cartManager = new CartManager();
+
+const cartProductsId = computed(() => {
+    return cartManager.getProductIdsByUserId(userManager.getCurrentUser())
+});
+
+
+
+const isRevealed = ref(false);
+const maskedText = computed(() => '•'.repeat(currentUser.value?.password?.length || 0));
+function toggleSpoiler() {
+    isRevealed.value = !isRevealed.value;
+}
+
+
+const user = reactive({
+    name: "",
+    id: 0,
+    password: "",
+    email: "",
+    currentUser: 0
+
+})
+const currentUser = computed(() => {
+    return userManager.getUserById(userManager.getCurrentUser())
+});
+function deleteUser(){
+    userManager.deleteUsersById(userManager.getCurrentUser())
+}
+function logout(){
+    userManager.logoutUser()
+}
+
+function createUser() {
+    if (user.name != "" && user.password != 0 && user.name != "") {
+        if (userManager.createUser(user.name, user.password, user.email)) {
+            userManager.loginUser(user.name, user.password, user.email)
+
+            user.name = ""
+            user.email = ""
+            user.password = ""
+
+        } else {
+            alert("i know this email.")
+        }
+    }
+}
+
+function login() {
+    if (userManager.loginUser(user.name, user.password, user.email)) {
+        user.name = ""
+        user.email = ""
+        user.password = ""
+    } else {
+        alert("u cant login")
+    }
+}
+
+
 </script>
 
 <template>
-        <div class="content">
+    <div class="content" >
         <div class="container main">
             <div class="container main-fog"></div>
 
             <h1 class="title">Профиль</h1>
         </div>
-        <div class="container">information 2</div>
-        <div class="container">information 1</div>
+
+        <div class="container user-card" v-if="userManager.getCurrentUser() != null">
+            <div class="user-info">
+                <img src="../assets/login_profile.png" alt="">
+                <div class="user-info-fog"></div>
+                <h2>Имя:{{ currentUser.name }}</h2>
+                <p>Email: {{ currentUser.email }}</p>
+
+                <p @click="toggleSpoiler" class="spoiler" :class="{ revealed: isRevealed }">
+                    Пароль: {{ isRevealed ? currentUser.password : maskedText }}
+                </p>
+
+                <div class="user-info-btn">
+                    <button @click="logout()">Выйти из акаунта</button>
+                    <button @click="deleteUser()">Удалить акаунт</button>
+                </div>
+            </div>
+            
+            <div class="user-games">
+                <div class="user-games-card" v-for="productId in cartProductsId"
+                    :style="{
+                        backgroundImage: `url(${productManager.getProductById(productId).backgroundImgUrl})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'bottom'
+                    }">
+                    <div class="user-games-card user-games-card-fog"></div>
+                    <div class="user-games-card-text">
+                        <h2>{{ productManager.getProductById(productId).name }}</h2>
+                        <button class="user-games-card-text-btn">Играть</button>
+                    </div>
+                    
+                </div>
+            </div>
+
+
+        </div>
+        
+        <div class="container" v-if="userManager.getCurrentUser() == null">
+            <input type="text" placeholder="name" v-model="user.name">
+            <input type="email" placeholder="email" v-model="user.email">
+            <input type="password" placeholder="password" v-model="user.password">
+            <button @click="login()">login</button>
+            <button @click="createUser()">Create</button>
+            {{ userManager.getUsers() }}
+        </div>
     </div>
 </template>
 
@@ -32,8 +139,7 @@ const userManager = new UserManager();
 
 .container {
     width: 85vw;
-    height: 40vw;
-    padding: 2vw;
+    height: 42vw;
     background-color: #f0f0f0;
     border-radius: 1vw;
     box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.2);
@@ -41,9 +147,11 @@ const userManager = new UserManager();
 
 .main {
     margin-top: -5vw;
+    padding: 2vw;
+
     padding-top: 0;
     
-    height: 10vw;
+    height: 14vw;
     border-radius: 0 0 1vw 1vw;
     
     
@@ -62,9 +170,10 @@ const userManager = new UserManager();
 
 .main-fog{
     position: absolute;
+    padding: 2vw;
 
     
-    height: 10vw;
+    height: 14vw;
 
     background-color: #0c0c0c45;
     box-shadow: 0 0vw 0vw rgba(0, 0, 0, 0);
@@ -81,4 +190,157 @@ const userManager = new UserManager();
     z-index: 1;
 
 }
+
+
+.user-card{
+    display: flex;
+    flex-direction: row;
+}
+
+.user-info{
+    position: relative; 
+    overflow: hidden; 
+    line-height: 1.5vw;
+
+    width:25vw;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2vw;
+    padding-top: 5vw;
+    gap: 2vw;
+
+    background-image: url("../assets/NatureBackground.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    border-radius: 1vw 0vw 0vw 1vw;
+
+    box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.2);
+    
+}
+
+.user-info p, .user-info h2, .user-info img{
+    color: white;
+    z-index: 1;
+}
+
+.user-info img{
+    margin-top: -3vw;
+    height: 9vw;
+    width: 9vw;
+}
+
+.user-info-btn{
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+
+
+    margin-top: 3vw;
+    z-index: 1;
+}
+.user-info-btn button{
+    background-color: rgb(218, 92, 92);
+}
+
+.user-info-fog{
+
+    position: absolute;
+    top: 0vw;
+    left: 0vw;
+
+    width: 30vw;
+    height: 65vw;
+
+
+    background-color: #797979a6;
+    
+
+    backdrop-filter: blur(0.6vw);
+}
+
+.user-games {
+    width: 60vw;
+    border-radius: 0vw 1vw 1vw 0;
+    padding: 2vw;
+    display: flex;
+    flex-wrap: wrap;  
+    gap: 2vw;
+}
+
+.user-games-card {
+    position: relative; 
+    overflow: hidden; 
+
+    width: 14vw;  
+    height: 15vw;
+    
+    background-color: #f0f0f0;
+    border-radius: 1vw;
+    box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.2);
+}
+
+.user-games-card-text{
+    transition: 0.3s;
+    
+    position: relative; 
+    bottom: -10vw;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vw;
+    padding-top: 1vw;
+    
+    width: 100%;
+    height: 20vw;
+
+    font-size: 0.7vw;
+    color: rgb(255, 255, 255);
+    background-color: #79797956;
+
+    backdrop-filter: blur(1vw);
+
+}
+.user-games-card-text-btn{
+    width: 10vw;
+}
+
+.user-games-card-text:hover{
+    bottom: -6vw;
+
+}
+
+.user-games-card-fog{
+    position: absolute;
+
+    width: 14vw;  
+    height: 15vw;
+
+    background-color: #79797900;
+
+}
+
+
+
+
+
+.spoiler {
+    cursor: pointer;
+    color: transparent;
+    border-radius: 0.3em;
+    padding: 0.2em 0.4em;
+    user-select: none;
+    transition: color 0.3s ease;
+}
+
+.spoiler.revealed {
+    background-color: transparent;
+}
+
+
 </style>
