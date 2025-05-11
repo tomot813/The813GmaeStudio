@@ -65,7 +65,12 @@ function login() {
     }
 }
 
-
+function downloadFile() {
+    const link = document.createElement('a');
+    link.href = 'src/download/test.txt'; 
+    link.download = 'test.txt'; 
+    link.click();
+}
 </script>
 
 <template>
@@ -103,7 +108,7 @@ function login() {
                     <div class="user-games-card user-games-card-fog"></div>
                     <div class="user-games-card-text">
                         <h2>{{ productManager.getProductById(productId).name }}</h2>
-                        <button class="user-games-card-text-btn">Играть</button>
+                        <button class="user-games-card-text-btn" @click="downloadFile()">Играть</button>
                     </div>
                     
                 </div>
