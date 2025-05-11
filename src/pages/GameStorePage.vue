@@ -44,7 +44,13 @@ function BuyProductById(productId) {
     isModalVisible.value = true;
 }
 function openPayModal(productId){
-    buySatetMachine.value = 'process' 
+    if(userManager.getCurrentUser() != null){
+
+        buySatetMachine.value = 'process' 
+    }else{
+        buySatetMachine.value = "not registered" 
+        
+    }
     currentProductId.value = productId;
     isModalVisible.value = true;
 }
