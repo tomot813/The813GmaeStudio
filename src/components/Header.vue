@@ -8,14 +8,13 @@ import { RouterLink } from 'vue-router';
 <template>
 
   <RouterLink class="header-style logo blue-line" :to="{ name: 'MainPage' }">
-    <!-- <img class="logo-img" src="../assets/logo_813.png" alt=""> -->
     813
   </RouterLink>
 
 
   <header class="header-style">
     <RouterLink class="menu-btn blue-line" :to="{ name: 'GameStorePage' }">Игры</RouterLink>
-    <RouterLink class="menu-btn blue-line" :to="{ name: 'pageTwo' }">Разработка</RouterLink>
+    <RouterLink class="menu-btn blue-line" :to="{ name: 'NewsPage' }">Новости</RouterLink>
     <RouterLink class="menu-btn blue-line" :to="{ name: 'pageThree' }">О Нас</RouterLink>
 
   </header>

@@ -30,16 +30,23 @@ const closeModal = () => {
 
 const buySatetMachine = ref("");
 const currentProductId = ref(null);
+const cardNumber = ref("");
+
 
 function BuyProductById(productId) {
-    if (userManager.getCurrentUser() != null) {
-        if(cartManager.addToCart(userManager.getCurrentUser(), productId)){
-            buySatetMachine.value = "fine" 
+    if(cardNumber.value != ""){
+
+        if (userManager.getCurrentUser() != null) {
+            if(cartManager.addToCart(userManager.getCurrentUser(), productId)){
+                buySatetMachine.value = "fine";
+            }else{
+                buySatetMachine.value = "already paid";
+            }
         }else{
-            buySatetMachine.value = "already paid" 
+            buySatetMachine.value = "not registered";
         }
     }else{
-        buySatetMachine.value = "not registered" 
+        buySatetMachine.value = "bad"; 
     }
     isModalVisible.value = true;
 }
@@ -61,7 +68,11 @@ function openPayModal(productId){
         <div class="modal" @click.stop>
             <div v-if="buySatetMachine == 'process'">
                 <h1>Введите номер карты</h1>
+                <input type="text" v-model="cardNumber" placeholder="0000-0000-0000-00-00"><br>
                 <button @click="BuyProductById(currentProductId)">Оплатить</button>
+            </div>
+            <div v-if="buySatetMachine == 'bad'">
+                <h1>Упс, тут пусто, попробуй еще раз</h1>
             </div>
             <div v-if="buySatetMachine == 'fine'">
                 <h1>Приятной игры</h1>
@@ -252,11 +263,25 @@ function openPayModal(productId){
     align-items: center;
     z-index: 1000;
 }
+.modal input {
+
+    margin-bottom: 1vw;
+
+    width: 15vw;
+    padding: 0.6vw;
+    border-radius: 0.5vw;
+    border: none;
+    outline: none;
+    font-size: 1vw;
+}
 
 .modal {
+    display: flex;
+    flex-direction: column;
+
     padding: 2vw;
     line-height: 1.5vw;
-    height: 20vw;
+    height: 21vw;
     width: 10wv;
     background-color: #b8b8b8a6;
     color: white;
@@ -270,8 +295,8 @@ function openPayModal(productId){
 }
 
 .modal button {
-    height: 5vw;
-    width: 25vw;
+    height: 4vw;
+    width: 23vw;
     background-color: #5cbd5f;
     transition: background-color 0.3s;
 }
