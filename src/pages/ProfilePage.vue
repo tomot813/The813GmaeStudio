@@ -65,9 +65,9 @@ function login() {
     }
 }
 
-function downloadFile() {
+function downloadFile(downloadLink) {
     const link = document.createElement('a');
-    link.href = '/The813GmaeStudio/download/test.txt'; 
+    link.href = downloadLink; 
     link.download = 'test.txt'; 
     link.click();
 }
@@ -107,7 +107,7 @@ function downloadFile() {
                     <div class="user-games-card user-games-card-fog"></div>
                     <div class="user-games-card-text">
                         <h2>{{ productManager.getProductById(productId).name }}</h2>
-                        <button class="user-games-card-text-btn" @click="downloadFile()">Играть</button>
+                        <button class="user-games-card-text-btn" @click="downloadFile(productManager.getProductById(productId).data)">Играть</button>
                     </div>
                     
                 </div>

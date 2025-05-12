@@ -120,7 +120,7 @@ header {
 }
 
 img:hover {
-    filter: brightness(0) saturate(100%) invert(48%) sepia(53%) saturate(379%) hue-rotate(76deg) brightness(92%) contrast(93%);
+    filter: brightness(0) saturate(100%) invert(48%) sepia(53%) saturate(379%) hue-rotate(76deg) brightness(100%) contrast(93%);
     cursor: pointer;
 }
 
