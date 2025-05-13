@@ -11,7 +11,34 @@ import { ref, computed } from 'vue';
             <div class="container main-fog"></div>
             <h1 class="title">О Нас</h1>
         </div>
-        <div class="container ">
+        <div class="container container-text">
+            <div class="about-text">
+                <h1 >Про Студию</h1>
+                <p >Мы — студия 813, и мы делаем игры, которые невозможно забыть. Нас вдохновляет абсурд, повседневность, тревожные сны и северная мятная жвачка. Мы любим экспериментировать с жанрами и смешивать несмешиваемое: философию и троллей, скейтбординг и газеты, уют и безумие. В наших играх можно выращивать цветы в теплице или драться с говорящими холодильниками. Главное — чтобы было по-настоящему, странно и интересно. 813 — это немного хаоса, немного красоты и всегда что-то не так.</p>
+
+            </div>
+            <img class="abiut-img" src="../assets/perkele2.png" alt="">
+
+        </div>
+        <div class="container container-workers">
+            <h1 >МЫ🥹</h1>
+            <div class="workers-grid">
+                <div class="worker">
+                    <img src="../assets/gosling.jpg" alt="">
+                    <h2>Ренат Гослянов</h2>
+                    <h3>Art Director</h3>
+                </div>
+                <div class="worker">
+                    <img src="../assets/hamilton.png" alt="">
+                    <h2>Александр Гамильтон</h2>
+                    <h3>Team Leader</h3>
+                </div>
+                <div class="worker">
+                    <img src="../assets/goodman.png" alt="">
+                    <h2>Саня Хорошенькович</h2>
+                    <h3>Game Designer</h3>
+                </div>
+            </div>
 
         </div>
         
@@ -83,4 +110,90 @@ import { ref, computed } from 'vue';
 }
 
 
+
+.container-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-text {
+    padding: 5vw;
+    text-align: left;
+
+    height: 20vw;
+    line-height: 1.4vw;
+    font-size: 1.2vw;
+    flex: 1; 
+}
+.about-text h1{
+    margin-top: -6vw;
+
+}
+
+.abiut-img  {
+    width: 30vw;
+    height: 40vw;
+    object-fit: cover;
+    border-radius: 1vw;
+    flex-shrink: 0;
+    z-index: 1;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges; 
+    image-rendering: -o-crisp-edges;   
+    image-rendering: -webkit-optimize-contrast; 
+    image-rendering: optimize-contrast;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: optimizeSpeed; 
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+
+
+.container-workers {
+    padding-bottom: 10vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vw;
+    height: auto;
+}
+
+.workers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
+    gap: 2vw;
+    width: 100%;
+    justify-items: center;
+}
+
+.worker {
+    text-align: center;
+    padding: 1vw;
+}
+
+.worker img {
+    width: 12vw;
+    height: 12vw;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0.3vw 0.6vw rgba(0, 0, 0, 0.2);
+    margin-bottom: 1vw;
+}
+
+.worker h2 {
+    font-size: 1.4vw;
+    margin: 0.5vw 0 0.3vw 0;
+}
+
+.worker h3 {
+    font-size: 1.1vw;
+    color: #555;
+    margin: 0;
+}
 </style>

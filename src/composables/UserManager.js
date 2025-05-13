@@ -36,7 +36,7 @@ watch(currentUser, (newValue) => {
 
 })
 
-users.value = []
+// users.value = []
 
 const cartManager = new CartManager()
 
@@ -49,10 +49,10 @@ class UserManager {
         }
         UserManager.instance = this;
 
-        if (users.value.length == 0) {
-            this.createUser("123", "123", "123")
-            this.loginUser("123", "123", "123")
-        }
+        // if (users.value.length == 0) {
+        //     this.createUser("123", "123", "123")
+        //     this.loginUser("123", "123", "123")
+        // }
     }
 
     getUsers() {

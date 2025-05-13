@@ -83,7 +83,6 @@ import { RouterLink } from 'vue-router';
 
 
     background-color: #0c0c0c96;
-  /* background-color: rgba(22, 22, 22, 0.815); */
   backdrop-filter: blur(0.6vw);
   border-radius: 1vw;
   box-shadow: 0 0.3vw 0.6vw rgba(0, 0, 0, 0.2);
@@ -120,28 +119,9 @@ header {
 }
 
 img:hover {
-    filter: brightness(0) saturate(100%) invert(48%) sepia(53%) saturate(379%) hue-rotate(76deg) brightness(100%) contrast(93%);
+    filter: brightness(0) saturate(100%) invert(48%) sepia(53%) saturate(379%) hue-rotate(76deg) brightness(110%) contrast(93%);
     cursor: pointer;
 }
 
-/* .red-line:hover {
-  box-shadow: 0 -1.3vw 0 rgb(196, 91, 91);
-}
 
-.yellow-line:hover {
-  box-shadow: 0 -1.3vw 0 rgb(238, 212, 98);
-} */
-
-/* .blue-line.router-link-active {
-  box-shadow: 0 1.3vw 0 rgb(91, 196, 151);
-
-} */
-
-/* .red-line.router-link-active {
-  box-shadow: 0 -1.3vw 0 rgb(196, 91, 91);
-}
-
-.yellow-line.router-link-active {
-  box-shadow: 0 -1.3vw 0 rgb(238, 212, 98);
-} */
 </style>

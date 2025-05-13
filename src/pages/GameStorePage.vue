@@ -34,7 +34,9 @@ const cardNumber = ref("");
 
 
 function BuyProductById(productId) {
-    if(cardNumber.value != ""){
+    const cardReg = /^\d{16}$/; 
+
+    if(cardReg.test(cardNumber.value)){
 
         if (userManager.getCurrentUser() != null) {
             if(cartManager.addToCart(userManager.getCurrentUser(), productId)){
@@ -45,6 +47,7 @@ function BuyProductById(productId) {
         }else{
             buySatetMachine.value = "not registered";
         }
+        cardNumber.value = ""
     }else{
         buySatetMachine.value = "bad"; 
     }
@@ -61,30 +64,38 @@ function openPayModal(productId){
     currentProductId.value = productId;
     isModalVisible.value = true;
 }
+
+function tryAgain(productId){
+    buySatetMachine.value = 'process' 
+    currentProductId.value = productId;
+    isModalVisible.value = true;
+}
 </script>
 
 <template>
     <div v-if="isModalVisible" class="modal-overlay" @click="closeModal">
         <div class="modal" @click.stop>
+            <button class="close-modal" @click="closeModal">X</button>
             <div v-if="buySatetMachine == 'process'">
                 <h1>Введите номер карты</h1>
                 <input type="text" v-model="cardNumber" placeholder="0000-0000-0000-00-00"><br>
-                <button @click="BuyProductById(currentProductId)">Оплатить</button>
+                <button class="modal-btn" @click="BuyProductById(currentProductId)">Оплатить</button>
             </div>
             <div v-if="buySatetMachine == 'bad'">
-                <h1>Упс, тут пусто, попробуй еще раз</h1>
+                <h1>Упс, попробуй еще раз</h1>
+                <button class="modal-btn" @click="tryAgain(currentProductId)">Попробовать еще раз</button>
             </div>
             <div v-if="buySatetMachine == 'fine'">
                 <h1>Приятной игры</h1>
-                <button @click="router.push({ name: 'ProfilePage' })">Играть</button>
+                <button class="modal-btn" @click="router.push({ name: 'ProfilePage' })">Играть</button>
             </div>
             <div v-if="buySatetMachine == 'not registered'">
                 <h1>Иди регайся </h1>
-                <button @click="router.push({ name: 'ProfilePage' })">Вход / Регистрация</button>
+                <button class="modal-btn" @click="router.push({ name: 'ProfilePage' })">Вход / Регистрация</button>
             </div>
             <div v-if="buySatetMachine == 'already paid'">
                 <h1>Вы уже купили эту игру</h1>
-                <button @click="router.push({ name: 'ProfilePage' })">Играть</button>
+                <button class="modal-btn" @click="router.push({ name: 'ProfilePage' })">Играть</button>
             </div>
         </div>
     </div>
@@ -275,13 +286,14 @@ function openPayModal(productId){
     font-size: 1vw;
 }
 
+
 .modal {
     display: flex;
     flex-direction: column;
 
     padding: 2vw;
     line-height: 1.5vw;
-    height: 21vw;
+    height: 25vw;
     width: 10wv;
     background-color: #b8b8b8a6;
     color: white;
@@ -294,11 +306,22 @@ function openPayModal(productId){
     width: 30vw;
 }
 
-.modal button {
+.modal-btn {
     height: 4vw;
     width: 23vw;
     background-color: #5cbd5f;
     transition: background-color 0.3s;
+}
+.close-modal{
+    height: 3vw;
+    width: 3vw;
+
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-color: #5cbd5f;
+
 }
 
 .modal button:hover {

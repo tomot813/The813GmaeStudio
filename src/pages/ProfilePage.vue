@@ -40,29 +40,68 @@ function logout(){
     userManager.logoutUser()
 }
 
+const errors = reactive({
+    name: "",
+    email: "",
+    password: "",
+    emailAlreadyUse: "",
+    cantLogin: ""
+})
+
 function createUser() {
-    if (user.name != "" && user.password != 0 && user.name != "") {
+    const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const nameReg= /^[A-Za-zА-Яа-яЁё]+$/;
+
+    errors.name = "",
+    errors.email = "",
+    errors.password = "",
+    errors.emailAlreadyUse = ""
+    errors.cantLogin = ""
+    
+    if (nameReg.test(user.name) && user.password != "" && emailReg.test(user.email)) {
         if (userManager.createUser(user.name, user.password, user.email)) {
             userManager.loginUser(user.name, user.password, user.email)
 
             user.name = ""
             user.email = ""
             user.password = ""
+            
 
         } else {
-            alert("i know this email.")
+            errors.emailAlreadyUse = "где то я уже видел этот email"
         }
+    }else {
+        if(!nameReg.test(user.name)){
+        errors.name = "Издеваешся? Введите нормальное имя — только буквы, ни пробелов, ни цифр"
+        }
+        if(!emailReg.test(user.email)){
+        errors.email = "Бога ради, введите корректный email в формате example@mail.com"        
+        }
+        if(user.password == ""){
+        errors.password = "Как твой адвокат, я настоятельно советую вести сильный пароль"
+        }
+
     }
 }
 
 function login() {
-    if (userManager.loginUser(user.name, user.password, user.email)) {
+    errors.name = "",
+    errors.email = "",
+    errors.password = "",
+    errors.emailAlreadyUse = ""
+    errors.cantLogin = ""
+    if(user.name != "" && user.password != "" && user.email != ""){
+        if (userManager.loginUser(user.name, user.password, user.email)) {
         user.name = ""
         user.email = ""
         user.password = ""
-    } else {
-        alert("u cant login")
+        } else {
+            errors.cantLogin = "Хм, а ты не мошенник часом?"
+        }
+    }else{
+        errors.cantLogin = "На что ты надеялся?"
     }
+
 }
 
 function downloadFile(downloadLink) {
@@ -121,12 +160,17 @@ function downloadFile(downloadLink) {
             <div class="login-content">
                 <h2>Добро пожаловать!</h2>
                 <input type="text" placeholder="Имя" v-model="user.name">
+                {{ errors.name }}
                 <input type="email" placeholder="Email" v-model="user.email">
+                {{ errors.email }}
                 <input type="password" placeholder="Пароль" v-model="user.password">
+                {{ errors.password }}
                 <div class="login-buttons">
                     <button @click="login()">Войти</button>
                     <button @click="createUser()">Создать аккаунт</button>
                 </div>
+                {{ errors.emailAlreadyUse }}
+                {{ errors.cantLogin }}
             </div>
         </div>
     </div>
