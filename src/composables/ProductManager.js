@@ -40,9 +40,10 @@ class ProductManager {
         ProductManager.instance = this;
 
         if (products.value.length == 0) {
-            this.createProduct("Flower Store", description_flower_store, "10$", test1Img, natureBg, "/The813GmaeStudio/download/flower.txt",);
+            
+            this.createProduct("Flower Store", description_flower_store, "10$", test1Img, natureBg, "/The813GmaeStudio/download/flower.txt");
 
-            this.createProduct("Perkele", description_perkele, "100$", perkeleImg, perkeleBg, "/The813GmaeStudio/download/perkele.txt",);
+            this.createProduct("Perkele", description_perkele, "100$", perkeleImg, perkeleBg, "/The813GmaeStudio/download/perkele.txt");
 
         }
     }
